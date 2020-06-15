@@ -1,0 +1,45 @@
+@import "./colors";
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "./index";
+@import "./header";
+@import "./portfolio";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
+
+//Self typed
+.self-typed {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: bolder;
+  color: #fff;
+}
+.absolute {
+  position: absolute;
+}
+.fontStyle {
+  font-family: "Dancing Script", "Montserrat", "Helvetica";
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.base-page {
+  padding: 150px 0 100px 0;
+  color: black;
+  background-color: #ecedee;
+  min-height: 100vh;
+
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.error {
+  color: red;
+}
