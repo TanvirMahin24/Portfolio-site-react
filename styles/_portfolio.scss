@@ -5,6 +5,7 @@
 
   .portfolio-card {
     background-image: linear-gradient(45deg, #4e54c8 0%, #8f94fb 100%);
+    height: 100%;
     border: none;
     color: white;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
@@ -25,14 +26,14 @@
       text-align: right;
       text-transform: uppercase;
       font-weight: 600;
-      font-size: 17px;
+      font-size: 20px;
     }
 
     &-city {
     }
 
     &-title {
-      font-size: 30px;
+      font-size: 1.5rem;
       font-weight: 700;
       line-height: 1.1;
       text-transform: uppercase;
@@ -46,5 +47,19 @@
       text-transform: uppercase;
       margin-bottom: 50px;
     }
+  }
+}
+.width-portfolio {
+  width: 33%;
+}
+@media screen and (max-width: 768px) {
+  .width-portfolio {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .width-portfolio {
+    margin: 0 auto;
+    width: 70%;
   }
 }

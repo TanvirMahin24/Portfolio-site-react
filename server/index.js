@@ -1,25 +1,26 @@
 const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
+const config = require("./config");
 const routes = require("../routes");
+const bodyParser = require("body-parser");
 
+//Auth
 const authService = require("./services/auth");
+
+//Routes
+const portfolioRoutes = require("./routes/portfolio");
+const blogRoutes = require("./routes/blog");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = routes.getRequestHandler(app);
 
 //Database integration
-
-const MongoClient = require("mongodb").MongoClient;
-const uri =
-  "mongodb+srv://mahin:1234@portfoliodb-85hvf.mongodb.net/portfolioDB?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  console.log("DB connected");
-  client.close();
-});
+mongoose
+  .connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Database Connected!"))
+  .catch((err) => console.error(err));
 
 const secretData = [
   {
@@ -36,6 +37,12 @@ app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(bodyParser.json());
+
+    //Portfolio Route
+    server.use("/api/v1/portfolios", portfolioRoutes);
+    //BlogRoute
+    server.use("/api/v1/blogs", blogRoutes);
 
     //Secret endpoient
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {

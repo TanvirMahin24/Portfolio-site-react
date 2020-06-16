@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Button } from "reactstrap";
+import { Button, Alert } from "reactstrap";
 import PortInput from "../forms/PortInput";
 import PortDate from "../forms/PortDate";
 
@@ -25,55 +25,62 @@ const validateInputs = (values) => {
   return errors;
 };
 
-const INITIAL_VALUES = {
-  title: "",
-  company: "",
-  location: "",
-  position: "",
-  description: "",
-  startDate: "",
-  endDate: "",
-};
-
 const PortfolioCreateForm = ({ initialValues, onSubmit, error }) => (
   <div>
     <Formik
-      initialValues={INITIAL_VALUES}
+      initialValues={initialValues}
       validate={validateInputs}
-      onSubmit={(values, { setSubmitting }) => {
-        onSubmit(values);
-      }}
+      onSubmit={onSubmit}
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field label="Title" type="text" name="title" component={PortInput} />
+          <Field type="text" name="title" label="Title" component={PortInput} />
           <Field
-            label="Company"
             type="text"
             name="company"
+            label="Company"
             component={PortInput}
           />
           <Field
-            label="Location"
             type="text"
             name="location"
+            label="Location"
             component={PortInput}
           />
           <Field
-            label="Position"
             type="text"
             name="position"
+            label="Position"
             component={PortInput}
           />
           <Field
-            label="Description"
             type="textarea"
             name="description"
+            label="Description"
             component={PortInput}
           />
-          <Field label="Start Date" name="startDate" component={PortDate} />
-          <Field label="End Date" name="endDate" component={PortDate} />
-          <Button type="submit" disabled={isSubmitting}>
+
+          <Field
+            name="startDate"
+            label="Start Date"
+            initialDate={initialValues.startDate}
+            component={PortDate}
+          />
+
+          <Field
+            name="endDate"
+            label="End Date"
+            canBeDisabled={true}
+            initialDate={initialValues.endDate}
+            component={PortDate}
+          />
+          {error && <Alert color="danger">{error}</Alert>}
+          <Button
+            color="success"
+            size="lg"
+            type="submit"
+            disabled={isSubmitting}
+          >
             Create
           </Button>
         </Form>

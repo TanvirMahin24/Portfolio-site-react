@@ -56,7 +56,7 @@ const Header = (props) => {
               </Link>
             </NavItem>
             <NavItem className="port-navbar-item">
-              <Link href="/portfolio">
+              <Link href="/portfolios">
                 <a className="nav-link port-navbar-link"> Portfolio</a>
               </Link>
             </NavItem>
