@@ -3,13 +3,14 @@ import BaseLayout from "../components/layout/BaseLayout";
 import BasePage from "../components/layout/BasePage";
 
 import withAuth from "../components/hoc/withAuth";
+import Profile from "../components/Profile";
 
 class Owner extends React.Component {
   render() {
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage>
-          <h1> I am Owner Page </h1>
+          <Profile />
         </BasePage>
       </BaseLayout>
     );

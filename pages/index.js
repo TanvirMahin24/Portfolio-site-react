@@ -13,14 +13,7 @@ class Index extends React.Component {
       isFlipping: false,
     };
 
-    this.roles = [
-      "Developer",
-      "Tech Lover",
-      "Team Player",
-      "Course Creator",
-      "React.js",
-      "Angular",
-    ];
+    this.roles = ["React", "Laravel", "Node.js", "MongoDB", "Next.js", "Vue"];
   }
 
   componentDidMount() {
@@ -63,7 +56,7 @@ class Index extends React.Component {
                       <div className="hero-section-content">
                         <h2> Full Stack Web Developer </h2>
                         <div className="hero-section-content-intro">
-                          Have a look at my portfolio and job history.
+                          Web development is something creative
                         </div>
                       </div>
                       <img
@@ -77,10 +70,9 @@ class Index extends React.Component {
                     </div>
                     <div className="back">
                       <div className="hero-section-content">
-                        <h2> Get Your Projects Done </h2>
+                        <h2>Get professional website</h2>
                         <div className="hero-section-content-intro">
-                          Profesional and top quality service in web
-                          development.
+                          Website represents you so don't compromise!
                         </div>
                       </div>
                       <img
