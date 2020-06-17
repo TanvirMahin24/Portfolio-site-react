@@ -3,6 +3,7 @@ const next = require("next");
 const mongoose = require("mongoose");
 const config = require("./config");
 const routes = require("../routes");
+const compression = require("compression");
 const bodyParser = require("body-parser");
 
 //Auth
@@ -37,6 +38,7 @@ app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(compression());
     server.use(bodyParser.json());
 
     //Portfolio Route
