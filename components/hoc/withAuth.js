@@ -2,7 +2,7 @@ import React from "react";
 import BaseLayout from "../layout/BaseLayout";
 import BasePage from "../layout/BasePage";
 
-const nameSpace = "http://localhost:3000";
+const nameSpace = process.env.NAMESPACE ||"http://localhost:3000" ;
 
 export default (role) => (Component) =>
   class withAuth extends React.Component {

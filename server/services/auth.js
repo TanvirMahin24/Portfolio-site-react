@@ -2,14 +2,13 @@ const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 
 //const config = require("../config");
-const NAMESPACE = "http://localhost:3000" || config.NAMESPACE;
 
 //Auth MIDDLEWARE
 exports.checkJWT = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
-    jwksRequestsPerMinute: 50,
+    jwksRequestsPerMinute: 100,
     jwksUri: "https://tm24.us.auth0.com/.well-known/jwks.json",
   }),
   audience: "6ZXORIFR1F4iiw5QhR2wZxcYjiUEbd6F",
@@ -20,7 +19,11 @@ exports.checkJWT = jwt({
 exports.checkRole = (role) => (req, res, next) => {
   const user = req.user;
 
-  if (user && user[NAMESPACE + "/role"] && user[NAMESPACE + "/role"] === role) {
+  if (
+    user &&
+    user[process.env.NAMESPACE + "/role"] &&
+    user[process.env.NAMESPACE + "/role"] === role
+  ) {
     next();
   } else {
     return res.status(401).send({

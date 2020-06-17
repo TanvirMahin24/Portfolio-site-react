@@ -20,31 +20,27 @@ class About extends React.Component {
                 />
                 <h1 className="title fadein">Hello, Welcome</h1>
                 <h4 className="subtitle fadein">To About Page</h4>
-                <p className="subsubTitle fadein">
-                  Feel free to read short description about me.
-                </p>
+                <p className="subsubTitle fadein">Get to know me</p>
               </div>
             </Col>
             <Col md="6">
               <div className="fadein">
-                <p>
-                  My name is Filip Jerga and I am an experienced software
-                  engineer and freelance developer.{" "}
+                <p className="lead">
+                  My name is <b>Noor Ajmir Tanvir Mahin</b> and I am student of
+                  Rajshahi University of Engineering and Technology (RUET).{" "}
                 </p>
-                <p>
-                  I have a Master's degree in Artificial Intelligence and
-                  several years of experience working on a wide range of
-                  technologies and projects from C++ development for ultrasound
-                  devices to modern mobile and web applications in React and
-                  Angular.
+                <p className="lead">
+                  Currently, I am completing my BSc degree in Computer Science
+                  and Engineering from RUET. I am very passionate about web
+                  development.
                 </p>
-                <p>
-                  Throughout my career, I have acquired advanced technical
-                  knowledge and the ability to explain programming topics
-                  clearly and in detail to a broad audience. I invite you to
-                  take my course, where I have put a lot of effort to explain
-                  web and software engineering concepts in a detailed, hands-on
-                  and understandable way.
+                <p className="lead">
+                  I started learning the aspects of web development almost 5
+                  years back. I always wondered about how the world wide web
+                  works! This raised the curiosity of learning web development.
+                  Now I am pretty confident coding in JavaScript. I have learned
+                  MongoDB, Express, React, and Node.js to be a full-stack MERN
+                  developer. Web developing is fun :)
                 </p>
               </div>
             </Col>

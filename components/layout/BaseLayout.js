@@ -18,7 +18,7 @@ const BaseLayout = (props) => {
         ></meta>
         <meta property="og:title" content="Tanvir Mahin Portfolio website" />
         <meta property="og:site_name" content="Tanvir Mahin" />
-        <meta property="og:url" content="tanvirmahin.herokuapp.com" />
+        <meta property="og:url" content={process.env.BASE_URL} />
         <meta
           property="og:description"
           content="I am Tanvir Mahin. I am a student of Rajshahi University of Engineering and Technology (RUET). I am a professional full-stack web developer. I use MERN stack for developing websites."

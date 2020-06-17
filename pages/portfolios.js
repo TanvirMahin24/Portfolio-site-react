@@ -51,7 +51,7 @@ class Portfolios extends React.Component {
     return portfolios.map((portfolio, index) => {
       return (
         <PortfolioCard key={portfolio._id} portfolio={portfolio}>
-          {isAuthenticated && (
+          {isAuthenticated &&  isSiteOwner && (
             <React.Fragment>
               <Button onClick={(e) => this.navigateToEdit(portfolio._id, e)}>
                 Edit
@@ -76,7 +76,7 @@ class Portfolios extends React.Component {
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage className="portfolio-page" title="Portfolios">
-          {isAuthenticated && (
+          {isAuthenticated && isSiteOwner && (
             <Button
               onClick={() => Router.pushRoute("/portfolioNew")}
               className="create-port-btn mb-3"

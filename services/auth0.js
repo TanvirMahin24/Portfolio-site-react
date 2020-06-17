@@ -11,8 +11,8 @@ class Auth0 {
   constructor() {
     this.auth0 = new auth0.WebAuth({
       domain: "tm24.us.auth0.com",
-      clientID: "6ZXORIFR1F4iiw5QhR2wZxcYjiUEbd6F",
-      redirectUri: `http://localhost:3000/callback`,
+      clientID: CLIENT_ID,
+      redirectUri: `${process.env.BASE_URL}/callback`,
       responseType: "token id_token",
       scope: "openid profile",
     });
