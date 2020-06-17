@@ -12,7 +12,7 @@ class Auth0 {
     this.auth0 = new auth0.WebAuth({
       domain: "tm24.us.auth0.com",
       clientID: CLIENT_ID,
-      redirectUri: `${process.env.BASE_URL}/callback`,
+      redirectUri: `https://tanvirmahin.herokuapp.com/callback`,
       responseType: "token id_token",
       scope: "openid profile",
     });
