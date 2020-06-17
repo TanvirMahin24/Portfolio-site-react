@@ -97,9 +97,8 @@ class Index extends React.Component {
                       </span>
                     )}
                     Welcome to the portfolio website of{" "}
-                    <span className="font-weight-bold">Tanvir Mahin</span>. Get
-                    informed, collaborate and discover projects I was working on
-                    through the years!
+                    <span className="font-weight-bold">Tanvir Mahin</span>
+                    <br /> Learn, Code & Enjoy
                   </h1>
                 </div>
                 <Typed

@@ -21,7 +21,7 @@ export default class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const NAMESPACE =process.env.NAMESPACE|| "http://localhost:3000" ;
+    const NAMESPACE = process.env.NAMESPACE || "http://localhost:3000";
 
     const isSiteOwner = user && user[NAMESPACE + "/role"] === "siteOwner";
     const auth = { user, isAuthenticated: !!user, isSiteOwner };
@@ -30,7 +30,7 @@ export default class MyApp extends App {
   }
 
   componentDidMount() {
-    // Fonts();
+    Fonts();
   }
 
   render() {
