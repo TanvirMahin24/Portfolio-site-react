@@ -18,7 +18,7 @@ const handle = routes.getRequestHandler(app);
 
 //Database integration
 mongoose
-  .connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(config.DB_URI, { useNewUrlParser: true })
   .then(() => console.log("Database Connected!"))
   .catch((err) => console.error(err));
 

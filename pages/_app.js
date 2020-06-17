@@ -1,30 +1,44 @@
+import React from "react";
 import App, { Container } from "next/app";
+import { ToastContainer } from "react-toastify";
+import Fonts from "../helpers/Fonts";
+
 import auth0 from "../services/auth0";
-//Styles import
+
+// Stylings
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/main.scss";
-if (typeof window !== "undefined") {
-  require("bootstrap");
-}
+import "react-toastify/dist/ReactToastify.css";
+
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
+    let pageProps = {};
     const user = process.browser
       ? await auth0.clientAuth()
       : await auth0.serverAuth(ctx.req);
 
-    let pageProps = {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const auth = { user, isAuthenticated: !!user };
+    const NAMESPACE = "http://localhost:3000" || process.env.NAMESPACE;
+
+    const isSiteOwner = user && user[NAMESPACE + "/role"] === "siteOwner";
+    const auth = { user, isAuthenticated: !!user, isSiteOwner };
 
     return { pageProps, auth };
   }
+
+  componentDidMount() {
+    // Fonts();
+  }
+
   render() {
     const { Component, pageProps, auth } = this.props;
 
     return (
       <Container>
+        <ToastContainer />
         <Component {...pageProps} auth={auth} />
       </Container>
     );

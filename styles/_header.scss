@@ -1,4 +1,5 @@
 // HEADER
+
 .port-navbar.port-nav-base {
   width: 100%;
   z-index: 15;
@@ -7,17 +8,10 @@
   .port-navbar {
     &-brand {
       color: white;
-      font-size: 2rem;
+      font-size: 24px;
+      text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: bold;
-      &.active {
-        color: #dba919;
-      }
-
-      &:hover,
-      &:focus {
-        color: #dba919;
-      }
     }
 
     &-item {
@@ -27,7 +21,7 @@
 
     &-link {
       color: white;
-      font-weight: bold;
+      font-weight: normal;
       letter-spacing: 0.8px;
       font-size: 18px;
       text-transform: uppercase;
@@ -42,10 +36,35 @@
       }
     }
   }
+
+  .port-dropdown-menu {
+    .port-dropdown-item {
+      color: #4e4e4e;
+      font-weight: normal;
+      font-size: 0.8rem;
+      border-bottom: 2px solid $gray-100;
+      &.active {
+        color: #dba919;
+      }
+    }
+
+    .port-dropdown-toggle {
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }
 
-// --------- DEFAULT HEADER -------------
 .port-navbar.port-nav-base.port-nav-default {
   padding: 30px;
   background-color: $secondary !important;
+}
+
+.bg-transparent.menu-open {
+  background-color: #2c3e50 !important;
+}
+
+.bg-transparent.menu-close {
+  transition: 1s;
 }

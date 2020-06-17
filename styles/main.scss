@@ -1,9 +1,11 @@
+@import "./mixins";
 @import "./colors";
 @import "../node_modules/bootstrap/scss/bootstrap";
-@import "./index";
-@import "./header";
-@import "./mixins";
 @import "./blogs";
+@import "./index";
+@import "./about";
+@import "./header";
+@import "./slate-editor";
 @import "./portfolio";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
@@ -19,7 +21,7 @@
   position: absolute;
 }
 .fontStyle {
-  font-family: "Dancing Script", "Montserrat", "Helvetica";
+  font-family: "Dancing Script", "Montserrat", "Helvetica" !important;
 }
 
 .clickable {
@@ -31,6 +33,7 @@
   color: black;
   background-color: #ecedee;
   min-height: 100vh;
+  overflow-x: hidden;
 
   .page-header {
     .page-header-title {

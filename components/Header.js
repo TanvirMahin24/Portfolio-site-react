@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import auth0 from "../services/auth0";
+import React from "react";
 import Link from "next/link";
+import ActiveLink from "./ActiveLink";
 import {
   Collapse,
   Navbar,
@@ -8,82 +8,174 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+  NavLink,
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
 } from "reactstrap";
 
-//Login component
+import auth0 from "../services/auth0";
+
+const BsNavLink = (props) => {
+  const { route, title } = props;
+  const className = props.className || "";
+
+  return (
+    <ActiveLink activeClassName="active" route={route}>
+      <a className={`nav-link port-navbar-link ${className}`}> {title} </a>
+    </ActiveLink>
+  );
+};
+
 const Login = () => {
   return (
     <span onClick={auth0.login} className="nav-link port-navbar-link clickable">
-      Login
+      {" "}
+      Login{" "}
     </span>
   );
 };
 
-//Logout component
 const Logout = () => {
   return (
     <span
       onClick={auth0.logout}
       className="nav-link port-navbar-link clickable"
     >
-      Logout
+      {" "}
+      Logout{" "}
     </span>
   );
 };
 
-const Header = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const toggle = () => setIsOpen(!isOpen);
+    this.state = {
+      isOpen: false,
+      dropdownOpen: false,
+    };
 
-  return (
-    <div>
-      <Navbar
-        className={`port-navbar port-nav-base absolute ${props.className}`}
-        color="transparent"
-        dark
-        expand="md"
-      >
-        <NavbarBrand className="port-navbar-brand fontStyle" href="/">
-          Tanvir Mahin
-        </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem className="port-navbar-item">
-              <Link href="/blogs">
-                <a className="nav-link port-navbar-link"> Blogs</a>
-              </Link>
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <Link href="/portfolios">
-                <a className="nav-link port-navbar-link"> Portfolio</a>
-              </Link>
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <Link href="/cv">
-                <a className="nav-link port-navbar-link"> CV</a>
-              </Link>
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <Link href="/about">
-                <a className="nav-link port-navbar-link"> About</a>
-              </Link>
-            </NavItem>
-            {props.isAuthenticated ? (
+    this.toggle = this.toggle.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
+  toggleDropdown() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen,
+    });
+  }
+
+  renderBlogMenu() {
+    const { isSiteOwner } = this.props;
+
+    if (isSiteOwner) {
+      return (
+        <Dropdown
+          className="port-navbar-link port-dropdown-menu"
+          nav
+          isOpen={this.state.dropdownOpen}
+          toggle={this.toggleDropdown}
+        >
+          <DropdownToggle className="port-dropdown-toggle" nav caret>
+            Blog
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                route="/blogs"
+                title="Blogs"
+              />
+            </DropdownItem>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                route="/blogs/new"
+                title="Create a Blog"
+              />
+            </DropdownItem>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                route="/blogs/dashboard"
+                title="Blogs Dashboard"
+              />
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      );
+    }
+
+    return (
+      <NavItem className="port-navbar-item">
+        <BsNavLink route="/blogs" title="Blog" />
+      </NavItem>
+    );
+  }
+
+  render() {
+    const { isAuthenticated, user, className } = this.props;
+    const { isOpen } = this.state;
+
+    const menuOpenClass = isOpen ? "menu-open" : "menu-close";
+
+    return (
+      <div>
+        <Navbar
+          className={`port-navbar port-nav-base absolute ${className} ${menuOpenClass}`}
+          color="transparent"
+          dark
+          expand="md"
+        >
+          <NavbarBrand className="port-navbar-brand fontStyle" href="/">
+            <img
+              src="/static/images/Logo.png"
+              alt=""
+              className="img-fluid"
+              style={{ maxHeight: "60px" }}
+            />{" "}
+            Tanvir Mahin
+          </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem className="port-navbar-item">
-                <Logout />
+                <BsNavLink route="/" title="Home" />
               </NavItem>
-            ) : (
-              <NavItem className="port-navbar-item">
-                <Login />
-              </NavItem>
-            )}
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
-};
+              {this.renderBlogMenu()}
 
-export default Header;
+              <NavItem className="port-navbar-item">
+                <BsNavLink route="/portfolios" title="Portfolio" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink route="/about" title="About" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink route="/cv" title="Cv" />
+              </NavItem>
+              {!isAuthenticated && (
+                <NavItem className="port-navbar-item">
+                  <Login />
+                </NavItem>
+              )}
+              {isAuthenticated && (
+                <NavItem className="port-navbar-item">
+                  <Logout />
+                </NavItem>
+              )}
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
+    );
+  }
+}
